@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        .bg{
+            background-color: lightgray;
+            width: 50%;
+            padding: 30px 30px;
+            margin: auto;
+        }
+       #head{
+            background-color: lightblue;
+            text-align: center;
+            color: blue;
+        }
+
+        input[type=text], input[type=date], input[type=number], input[type=email], select{
+            width: 100%;
+            padding: 10px 10px;
+            margin: 8px 0px;
+            box-sizing: border-box;
+            border: 2px solid blue;
+            border-radius: 10px;
+        }
+
+        input[type=submit]{
+            padding: 20px 30px;
+            color: white;
+            background-color: blue;
+            font-size: 16px;
+        }
+
+        input[type=text]:focus{
+            background-color:blue;
+            color: white;
+            font-size: 15px;
+        }
+
+        input[type=submit]:hover{
+            background-color:green;
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="bg">
+        <div id="head"><h1>Insert Student</h1></div>
+        <div class="form">
+            <form>
+                <label>name</label>
+                <input type="text" name="studentname" placeholder="student name here" required><br />
+                <label>DOB</label>
+                <input type="date" name="studentBday" required><br />
+                <label>contact</label>
+                <input type="number" name="studentno" required><br />
+                <label>email</label>
+                <input type="email" name="studentemail" required><br />
+                <label>District</label>
+                <select name="studistrict" required>
+                    <option value="kandy">kandy</option>
+                    <option value="colombo">colombo</option>
+                    <option value="kurunagala">kurunagala</option>
+                </select><br />
+                <input type="submit" name="sumbit">
+            </form>
+        </div>
+    </div>
+    <div class="form">
+        <form action="" method="post">
+            <label>Name</lable>
+        </form>
+    </div>
+
+    <?php
+
+    $server = "localhost";
+    $user = "root";
+    $password = "";
+    $database = "schooldb";
+
+    $conn = mysqli_connect($server,$user,$password,$database);
+
+    if (!$conn){
+    die("not connected".mysqli_connect_error());
+    } else{
+    echo "connected";
+    }
+
+    $studentname = $_POST['studentname'];
+    $studentBday = $_POST['studentBday'];
+    $studentno = $_POST['studentno'];
+    $studentemail = $_POST['studentemail'];
+    $studistrict = $_POST['studistrict'];
+
+    $query = "INSERT INTO student(studentName,studentBday,stuContact,stuEmail,stuDistrict)VALUES('$studentname','$studentBday','$studentno','$studentemail','$studistrict')";
+
+    if(mysqli_query($conn,$query)){
+    echo "data inserted";
+
+    }else{
+    echo "data not inserted".mysqli_error($conn);
+    }
+
+    ?>
+
+</body>
+</html>
